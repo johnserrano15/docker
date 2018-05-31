@@ -2,16 +2,21 @@ version: '3'
 services:
   web:
     build: .
-    expose:
-      - "5000"
     volumes:
       - .:/code
+    expose:
+      - "3000"
   redis:
-    image: redis
-  lb:
-    image: tutum/haproxy
-    ports:
-      - "80:80"
-    environment:
-      - BACKEND_PORT=5000
-      - BALANCE=roundrobin
+    image: redis:alpine
+#Probar con un ngnix
+  # lb:
+  #   image: eeacms/haproxy
+  #   depends_on:
+  #     - web
+  #   ports:
+  #     - "80:3000"
+  #     - "1936:1936"
+  #   environment:
+  #     BACKENDS: "web"
+  #     DNS_ENABLED: "true"
+  #     LOG_LEVEL: "info"  
